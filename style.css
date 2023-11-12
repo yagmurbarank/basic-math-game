@@ -1,0 +1,22 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+main{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+	background:radial-gradient(circle,rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+h1{
+	text-align: center;
+	color: white;
+	font-size: 3rem;
+}
+/* start writing your code (Step 2)*/
