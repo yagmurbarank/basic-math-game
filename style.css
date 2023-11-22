@@ -1,22 +1,106 @@
 * {
-	margin: 0px;
-	padding: 0px;
-	box-sizing: border-box;
-	font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-main{
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	flex-direction: column;
-	background:radial-gradient(circle,rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
 }
-h1{
-	text-align: center;
-	color: white;
-	font-size: 3rem;
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+    padding: 40px;
 }
-/* start writing your code (Step 2)*/
+
+.box {
+    height: 90vh;
+    margin-top: 20px; /* Added margin between box and h1 */
+    border-radius: 2rem;
+    background: linear-gradient(#ec92af 0%, #5fc3e4 100%);
+    box-shadow: 0 1.2rem 3rem 0.5rem rgba(255, 254, 254, 0.989);
+}
+
+.sec1 {
+    height: 35%;
+    padding: 10px;
+    margin-top: 20px; /* Added margin between sec1 and box */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.instruction {
+    text-align: center;
+    text-transform: capitalize;
+    width: 100%;
+    font-size: 1.3rem;
+    color: white;
+    padding: 30px;
+}
+
+#operand1,
+#operand2 {
+    padding: 1.5rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+    color: white;
+}
+
+#operator {
+    padding: 15px 20px;
+    border: 1px solid white;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.sec2 {
+    height: 65%;
+    padding: 10px;
+    margin-top: 20px; /* Added margin between sec2 and box */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#option1,
+#option2,
+#option3,
+#option4 {
+    padding: 1rem 2rem;
+    color: rgba(100, 142, 220, 0.989);
+	background-color: aliceblue;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 15px; /* Added margin between buttons */
+}
+
+#msgbox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(21, 21, 21);
+    padding: 1rem 1rem;
+    color: rgb(248, 248, 248);
+    font-size: 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px; /* Added margin between msgbox and sec2 */
+}
+
+
+
