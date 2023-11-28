@@ -1,107 +1,105 @@
-const operand1 = document.querySelector("#operand1");
- const operand2 = document.querySelector("#operand2");
- const operator = document.querySelector("#operator");
- const option1 = document.querySelector("#option1");
- const option2 = document.querySelector("#option2");
- const option3 = document.querySelector("#option3");
- const option4 = document.querySelector("#option4");
- const msgbox = document.querySelector("#msgbox");
- const correctBeep = document.querySelector("#correctBeep");
- const wrongBeep = document.querySelector("#wrongBeep");
+const operand1Element = document.querySelector("#operand1");
+const operand2Element = document.querySelector("#operand2");
+const operatorElement = document.querySelector("#operator");
+const option1 = document.querySelector("#option1");
+const option2 = document.querySelector("#option2");
+const option3 = document.querySelector("#option3");
+const option4 = document.querySelector("#option4");
+const msgbox = document.querySelector("#msgbox");
+const correctBeep = document.querySelector("#correctBeep");
+const wrongBeep = document.querySelector("#wrongBeep");
 const options = [option1, option2, option3, option4];
-var answer = 0;
+const operators = ['-', '+', 'x', '÷'];
+let answer = 0;
 
-function generate_equation(){ 
-  var operand1 = Math.floor(Math.random() * 15),
-      operand2 = Math.floor(Math.random() * 30),
-      dummyAnswer1 = Math.floor(Math.random() * 20),
-      dummyAnswer2 = Math.floor(Math.random() * 20),
-      dummyAnswer3 = Math.floor(Math.random() * 30),
-      allAnswers = [],
-      switchAnswers = [];
-  answer = eval(operand1 + operand2);
-  
-  document.getElementById("operand1").innerHTML = operand1; 
-  document.getElementById("operand2").innerHTML = operand2; 
+function generate_equation() {
+    const operand1 = Math.floor(Math.random() * 15);
+    const operand2 = Math.floor(Math.random() * 30);
+    const operatorIndex = Math.floor(Math.random() * 4); // 0: -, 1: +, 2: x, 3: ÷
+    const dummyAnswer1 = Math.floor(Math.random() * 20);
+    const dummyAnswer2 = Math.floor(Math.random() * 25);
+    const dummyAnswer3 = Math.floor(Math.random() * 30);
+    const allAnswers = [];
+    const switchAnswers = [];
 
-  allAnswers = [answer, dummyAnswer1, dummyAnswer2, dummyAnswer3];
-
-  for (i = allAnswers.length; i--;){
-    switchAnswers.push(allAnswers.splice(Math.floor(Math.random() * (i + 1)), 1)[0]);
-  };
-
-  option1.innerHTML = switchAnswers[0];
-  option2.innerHTML = switchAnswers[1];
-  option3.innerHTML = switchAnswers[2]; 
-  option4.innerHTML = switchAnswers[3]; 
-
-
-};
-
-option1.addEventListener("click", function(){
-    if(option1.innerHTML == answer){
-        correctBeep.play();
-        setTimeout(() => {
-            generate_equation();
-       }, 1000);
+    switch (operatorIndex) {
+        case 0:
+            answer = operand1 - operand2;
+            break;
+        case 1:
+            answer = operand1 + operand2;
+            break;
+        case 2:
+            answer = operand1 * operand2;
+            break;
+        case 3:
+            answer = Math.round((operand1 / operand2) * 100) / 100; // Division result rounded to two decimal places
+            break;
+        default:
+            break;
     }
-    else{
-      wrongBeep.play();
-      setTimeout(() => {
-        generate_equation();
-            }, 1000); // Delay before generating the next question
-            }
-    
-});
 
-option2.addEventListener("click", function(){
-    if(option2.innerHTML == answer){
-        correctBeep.play();
-        setTimeout(() => {
-            generate_equation();
-       }, 1000);
+    operand1Element.textContent = operand1;
+    operand2Element.textContent = operand2;
+    operatorElement.textContent = operators[operatorIndex];
+
+    allAnswers.push(answer, dummyAnswer1, dummyAnswer2, dummyAnswer3);
+
+    for (let i = allAnswers.length; i--;) {
+        switchAnswers.push(allAnswers.splice(Math.floor(Math.random() * (i + 1)), 1)[0]);
     }
-    else{
-      wrongBeep.play();
-      setTimeout(() => {
-        generate_equation();
-   }, 1000); // Delay before generating the next question
+
+    options[0].textContent = switchAnswers[0];
+    options[1].textContent = switchAnswers[1];
+    options[2].textContent = switchAnswers[2];
+    options[3].textContent = switchAnswers[3];
 }
-});
 
-option3.addEventListener("click", function(){
-    if(option3.innerHTML == answer){
-        correctBeep.play();
-        setTimeout(() => {
-            generate_equation();
-       }, 1000);
-    
-    }
-    else{
+
+function handleOptionClick(index) {
+  // Disable all options to prevent further clicks during processing
+  options.forEach(option => {
+      option.setAttribute("disabled", "true");
+  });
+
+  // Highlight the selected option
+
+
+  // Check if the selected option is correct
+  if (parseInt(options[index].textContent) === answer) {
+    options[index].setAttribute("style", "background-color:green;");
+      correctBeep.play();
+      setTimeout(()=> {
+        generate_equation();
+      },1000);
+  } else {
+    options[index].setAttribute("style", "background-color:red;");
       wrongBeep.play();
-      setTimeout(() => {
+      setTimeout(()=> {
         generate_equation();
-   }, 1000); // Delay before generating the next question
+      },1000);
+  }
+
+  // Wait for a moment before moving to the next question
+  setTimeout(() => {
+      // Reset styles and enable options for the next question
+      options.forEach(option => {
+          option.removeAttribute("disabled");
+          option.removeAttribute("style");
+      });
+
+      // Generate a new question
+      generate_equation();
+  }, 1000);
 }
-    
-});
-option4.addEventListener("click", function(){
-    if(option4.innerHTML == answer){
-        correctBeep.play();
-      setTimeout(() => {
-        generate_equation();
-   }, 1000);
-    }
-    else{
-      wrongBeep.play();
-      setTimeout(() => {
-        generate_equation();
-   }, 1000); // Delay before generating the next question
-}
+
+// Attach the event handler to each option
+options.forEach((option, index) => {
+  option.addEventListener("click", () => {
+      handleOptionClick(index);
+  });
 });
 
 generate_equation();
-
-
 
 
