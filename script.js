@@ -101,5 +101,9 @@ options.forEach((option, index) => {
 });
 
 generate_equation();
+ 
+function generate_result(){
 
+  
+}
 
