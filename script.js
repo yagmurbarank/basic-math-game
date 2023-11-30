@@ -5,12 +5,14 @@ const option1 = document.querySelector("#option1");
 const option2 = document.querySelector("#option2");
 const option3 = document.querySelector("#option3");
 const option4 = document.querySelector("#option4");
-const msgbox = document.querySelector("#msgbox");
+const result = document.querySelector("#result");
 const correctBeep = document.querySelector("#correctBeep");
 const wrongBeep = document.querySelector("#wrongBeep");
 const options = [option1, option2, option3, option4];
 const operators = ['-', '+', 'x', '÷'];
 let answer = 0;
+let correctAnswers=0;
+let totalQuestions=0;
 
 function generate_equation() {
     const operand1 = Math.floor(Math.random() * 15);
@@ -69,6 +71,7 @@ function handleOptionClick(index) {
   if (parseInt(options[index].textContent) === answer) {
     options[index].setAttribute("style", "background-color:green;");
       correctBeep.play();
+      correctAnswers++
       setTimeout(()=> {
         generate_equation();
       },1000);
@@ -79,6 +82,7 @@ function handleOptionClick(index) {
         generate_equation();
       },1000);
   }
+  totalQuestions++
 
   // Wait for a moment before moving to the next question
   setTimeout(() => {
@@ -100,10 +104,26 @@ options.forEach((option, index) => {
   });
 });
 
-generate_equation();
  
-function generate_result(){
-
+function showResult() {
+    // Disable all options to prevent further clicks during processing
+    // options.forEach(option => {
+    //     option.setAttribute("disabled", "true");
+    // });
   
+    // Add a click event listener to the result
+    result.style.cursor = "pointer"; // Change cursor to indicate it's clickable
+    result.addEventListener("click", handleResultClick, { once: true });
 }
 
+function handleResultClick() {
+    // Show detailed results in an alert
+    alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+}
+
+// Attach the event handler to the result button
+result.addEventListener("click", showResult);
+
+  
+
+generate_equation();
