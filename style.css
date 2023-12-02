@@ -21,7 +21,11 @@ h1 {
     font-size: 3rem;
     padding: 2rem;
 }
-
+h2{
+    text-align: left;
+    color: white;
+    padding: 2rem;
+}
 .box {
     height: auto;
     min-height: 80vh;

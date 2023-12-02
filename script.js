@@ -112,18 +112,24 @@ function showResult() {
     // });
   
     // Add a click event listener to the result
-    result.style.cursor = "pointer"; // Change cursor to indicate it's clickable
+     result.style.cursor = "pointer"; // Change cursor to indicate it's clickable
     result.addEventListener("click", handleResultClick, { once: true });
 }
 
 function handleResultClick() {
     // Show detailed results in an alert
-    alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+    window.open('/result.html', '_self');
+    // alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
 }
 
 // Attach the event handler to the result button
-result.addEventListener("click", showResult);
+result.addEventListener("click", handleResultClick);
 
+function goBackGame() {
   
+
+}
+
+
 
 generate_equation();
