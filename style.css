@@ -99,6 +99,20 @@ h2{
     cursor: pointer;
     margin-top: 50px;
 }
+#goBackGame{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(21, 21, 21);
+    padding: 1rem 3rem;
+    color:antiquewhite;
+    background-color:transparent;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 50px;
+}
 
 /* Media Query for Tablets and Smaller Screens */
 @media (max-width: 768px) {

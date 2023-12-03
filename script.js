@@ -6,6 +6,7 @@ const option2 = document.querySelector("#option2");
 const option3 = document.querySelector("#option3");
 const option4 = document.querySelector("#option4");
 const result = document.querySelector("#result");
+const goBackGame=document.querySelector("#goBackGame");
 const correctBeep = document.querySelector("#correctBeep");
 const wrongBeep = document.querySelector("#wrongBeep");
 const options = [option1, option2, option3, option4];
@@ -104,13 +105,9 @@ options.forEach((option, index) => {
   });
 });
 
- 
+generate_equation();
+
 function showResult() {
-    // Disable all options to prevent further clicks during processing
-    // options.forEach(option => {
-    //     option.setAttribute("disabled", "true");
-    // });
-  
     // Add a click event listener to the result
      result.style.cursor = "pointer"; // Change cursor to indicate it's clickable
     result.addEventListener("click", handleResultClick, { once: true });
@@ -124,12 +121,26 @@ function handleResultClick() {
 
 // Attach the event handler to the result button
 result.addEventListener("click", handleResultClick);
+// Set up a click event listener for the result button
+document.getElementById("result").addEventListener("click", handleResultClick);
 
-function goBackGame() {
-  
+// Function to handle the click event for going back to the game
+function handleBackClick() {
+    // Navigate back to the game (index.html)
+    window.open('/index.html', '_self');
+}
 
+// Call the function to set up the event listener
+
+backToGame();
+// Function to set up the event listener for going back to the game
+function backToGame() {
+    // Get the button element by its ID
+    const backButton = document.getElementById("goBackGame");
+
+    // Set up a click event listener for the "Go back to the game" button
+    backButton.addEventListener("click", handleBackClick, { once: true });
 }
 
 
 
-generate_equation();
