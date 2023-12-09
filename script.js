@@ -14,14 +14,15 @@ const operators = ['-', '+', 'x', '÷'];
 let answer = 0;
 let correctAnswers=0;
 let totalQuestions=0;
+let wrongAnswers=0;
 
 function generate_equation() {
     const operand1 = Math.floor(Math.random() * 15);
     const operand2 = Math.floor(Math.random() * 30);
     const operatorIndex = Math.floor(Math.random() * 4); // 0: -, 1: +, 2: x, 3: ÷
-    const dummyAnswer1 = Math.floor(Math.random() * 20);
-    const dummyAnswer2 = Math.floor(Math.random() * 25);
-    const dummyAnswer3 = Math.floor(Math.random() * 30);
+    const dummyAnswer1 = Math.floor(Math.random() * 25);
+    const dummyAnswer2 = Math.floor(Math.random() * 30);
+    const dummyAnswer3 = Math.floor(Math.random() * 33);
     const allAnswers = [];
     const switchAnswers = [];
 
@@ -36,7 +37,7 @@ function generate_equation() {
             answer = operand1 * operand2;
             break;
         case 3:
-            answer = Math.round((operand1 / operand2) * 100) / 100; // Division result rounded to two decimal places
+          answer = (operand2 !== 0) ? Math.round(operand1 / operand2) : 0; // Division result rounded to two decimal places
             break;
         default:
             break;
@@ -72,13 +73,14 @@ function handleOptionClick(index) {
   if (parseInt(options[index].textContent) === answer) {
     options[index].setAttribute("style", "background-color:green;");
       correctBeep.play();
-      correctAnswers++
+      correctAnswers++;
       setTimeout(()=> {
         generate_equation();
       },1000);
   } else {
     options[index].setAttribute("style", "background-color:red;");
       wrongBeep.play();
+      wrongAnswers++;
       setTimeout(()=> {
         generate_equation();
       },1000);
@@ -111,36 +113,56 @@ function showResult() {
     // Add a click event listener to the result
      result.style.cursor = "pointer"; // Change cursor to indicate it's clickable
     result.addEventListener("click", handleResultClick, { once: true });
+    correctAnswers=document.querySelector("#correct");
+    wrongAnswers=document.querySelector("#wrong");
+
 }
 
 function handleResultClick() {
     // Show detailed results in an alert
     window.open('/result.html', '_self');
+      // Update the content of the HTML elements with the correct and wrong answers
+      const correctElement = document.getElementById("correct");
+      const wrongElement = document.getElementById("worong"); // Typo in your HTML ID
+    
+      correctElement.textContent = `Correct answers: ${correctAnswers}`;
+      wrongElement.textContent = `Wrong answers: ${wrongAnswers}`;
+            // Show the result section
+      const resultSection = document.querySelector(".box");
+      resultSection.style.display = "block";
+  
+      const gameSection = document.querySelector("main");
+      gameSection.style.display = "none";
+
+   
+    }
     // alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+
+
+
+
+// Function to set up the event listener for going back to the game
+                          
+function backTogame() {
+  // Add a click event listener to the result
+   goBackGame.style.cursor = "pointer"; // Change cursor to indicate it's clickable
+  goBackGame.addEventListener("click", handleBackGametClick, { once: true });
+
+
 }
+
+function handleBackGametClick() {
+  // Show detailed results in an alert
+  window.open('/index.html', '_self');
+    // Update the content of the HTML elements with the correct and wrong answers
+    generate_equation();
+
+ 
+  }
+  // alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+
 
 // Attach the event handler to the result button
+goBackGame.addEventListener("click", handleBackGametClick);
+// Attach the event handler to the result button
 result.addEventListener("click", handleResultClick);
-// Set up a click event listener for the result button
-document.getElementById("result").addEventListener("click", handleResultClick);
-
-// Function to handle the click event for going back to the game
-function handleBackClick() {
-    // Navigate back to the game (index.html)
-    window.open('/index.html', '_self');
-}
-
-// Call the function to set up the event listener
-
-backToGame();
-// Function to set up the event listener for going back to the game
-function backToGame() {
-    // Get the button element by its ID
-    const backButton = document.getElementById("goBackGame");
-
-    // Set up a click event listener for the "Go back to the game" button
-    backButton.addEventListener("click", handleBackClick, { once: true });
-}
-
-
-

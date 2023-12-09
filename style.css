@@ -34,6 +34,15 @@ h2{
     background: linear-gradient(#94ec92 0%, #5fc3e4 100%);
     box-shadow: 0 1.2rem 3rem 0.5rem rgba(255, 254, 254, 0.989);
 }
+.box2{
+        height: auto;
+        min-height: 80vh;
+        margin-top: 20px;
+        border-radius: 2rem;
+        background: linear-gradient(#94ec92 0%, #5fc3e4 100%);
+        box-shadow: 0 1.2rem 3rem 0.5rem rgba(255, 254, 254, 0.989);
+    }
+
 
 .sec1 {
     height: auto;
