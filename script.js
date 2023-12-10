@@ -57,6 +57,7 @@ function generate_equation() {
     options[1].textContent = switchAnswers[1];
     options[2].textContent = switchAnswers[2];
     options[3].textContent = switchAnswers[3];
+
 }
 
 
@@ -121,9 +122,12 @@ function showResult() {
 function handleResultClick() {
     // Show detailed results in an alert
     window.open('/result.html', '_self');
+    // alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+     console.log(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+
       // Update the content of the HTML elements with the correct and wrong answers
       const correctElement = document.getElementById("correct");
-      const wrongElement = document.getElementById("worong"); // Typo in your HTML ID
+      const wrongElement = document.getElementById("wrong"); 
     
       correctElement.textContent = `Correct answers: ${correctAnswers}`;
       wrongElement.textContent = `Wrong answers: ${wrongAnswers}`;
@@ -136,33 +140,29 @@ function handleResultClick() {
 
    
     }
-    // alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+   
+// Attach the event handler to the result button
+result.addEventListener("click", handleResultClick);
 
 
 
-
-// Function to set up the event listener for going back to the game
-                          
-function backTogame() {
-  // Add a click event listener to the result
-   goBackGame.style.cursor = "pointer"; // Change cursor to indicate it's clickable
-  goBackGame.addEventListener("click", handleBackGametClick, { once: true });
-
-
-}
-
-function handleBackGametClick() {
+function handleBackGameClick() {
   // Show detailed results in an alert
   window.open('/index.html', '_self');
-    // Update the content of the HTML elements with the correct and wrong answers
+
     generate_equation();
 
  
   }
-  // alert(`Correct Answers: ${correctAnswers}\nIncorrect Answers: ${totalQuestions - correctAnswers}`);
+                           
+function backTogame() {
+  // Add a click event listener to the result
+   goBackGame.style.cursor = "pointer"; // Change cursor to indicate it's clickable
+  goBackGame.addEventListener("click", handleBackGameClick, { once: true });
 
 
+}
+
 // Attach the event handler to the result button
-goBackGame.addEventListener("click", handleBackGametClick);
-// Attach the event handler to the result button
-result.addEventListener("click", handleResultClick);
+goBackGame.addEventListener("click", () => {handleBackGameClick();});
+
